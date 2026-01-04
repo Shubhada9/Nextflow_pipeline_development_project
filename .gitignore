@@ -1,0 +1,19 @@
+# Nextflow runtime files
+.nextflow*
+work/
+trace.txt
+trace-*.txt
+timeline.html
+report.html
+dag.html
+
+# Logs
+*.log
+
+# Data & results
+data/
+results/
+
+# OS files
+.DS_Store
+

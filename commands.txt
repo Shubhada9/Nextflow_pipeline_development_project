@@ -1,0 +1,964 @@
+    1  wsl -l -v
+    2  sudo apt update && sudo apt upgrade -y
+    3  sudo apt install -y build-essential git curl wget unzip
+    4  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    5  bash Miniconda3-latest-Linux-x86_64.sh
+    6  conda activate
+    7  conda create -n bnf
+    8  conda activate bnf
+    9  conda install -c bioconda -c conda-forge bwa samtools bedtools fastqc blast hmmer
+   10  conda install -c bioconda fastp
+   11  conda install -c bioconda trimmomatic
+   12  conda install -c bioconda cutadapt
+   13  sudo apt install pigz
+   14  conda install -c bioconda bwa-mem2
+   15  conda install -c bioconda bowtie2
+   16  conda install -c bioconda minimap2
+   17  conda install -c bioconda star
+   18  conda install -c bioconda hisat2
+   19  conda install -c bioconda picard
+   20  conda install -c bioconda sambamba
+   21  conda install -c bioconda bcftools
+   22  conda install -c bioconda gatk4
+   23  conda install -c bioconda snpeff
+   24  conda install -c bioconda ensembl-vep
+   25  conda install -c bioconda ucsc-bedgraphtobigwig ucsc-bigwigtobedgraph
+   26  fastqc --version
+   27  fastp --version
+   28  cutadapt --version
+   29  trimmomatic -version
+   30  bwa
+   31  bwa-mem2
+   32  bowtie2 --version
+   33  hisat2 --version
+   34  minimap2 --version
+   35  samtools --version
+   36  picard -h
+   37  sambamba --version
+   38  gatk --help
+   39  bcftools --version
+   40  snpeff
+   41  vep --help
+   42  conda activate bnf
+   43  fastqc --version
+   44  FastQC v0.12.1
+   45  fastp --version
+   46  fastp 0.23.4
+   47  trimmomatic -version
+   48  0.39
+   49  cutadapt --version
+   50  pigz --version
+   51  bwa
+   52  bwa-mem2
+   53  conda install -c conda-forge gsl
+   54  conda install -c bioconda bcftools --force-reinstall
+   55  bcftools --version
+   56  conda install -c bioconda snpeff
+   57  snpEff
+   58  which snpEff
+   59  head -n 5 "$(which snpEff)"
+   60  java -version
+   61  which snpEff
+   62  ls -R $(dirname $(which snpEff)) | grep -i snpeff
+   63  conda remove snpeff
+   64  which snpEff
+   65  v
+   66  rm /home/shubh/ENTER/envs/bnf/bin/snpEff
+   67  conda config --add channels defaults
+   68  conda config --add channels bioconda
+   69  conda config --add channels conda-forge
+   70  conda install -c bioconda snpeff
+   71  find $CONDA_PREFIX -name "snpEff.jar"
+   72  snpEff -version
+   73  rm /home/shubh/ENTER/envs/bnf/bin/snpEff
+   74  which snpEff
+   75  chmod +x /home/shubh/ENTER/envs/bnf/bin/snpEff
+   76  hash -r
+   77  snpEff -version
+   78  mkdir -p /home/shubh/ENTER/envs/bnf/bin
+   79  nano /home/shubh/ENTER/envs/bnf/bin/snpEff
+   80  fastqc --version
+   81  fastp --version
+   82  cutadapt --version
+   83  trimmomatic -version
+   84  bwa
+   85  bwa-mem2
+   86  bowtie2 --version
+   87  hisat2 --version
+   88  minimap2 --version
+   89  samtools --version
+   90  picard -h
+   91  sambamba --version
+   92  gatk --help
+   93  bcftools --version
+   94  snpeff
+   95  vep –help
+   96  conda activate bnf
+   97  conda install -c bioconda fastqc
+   98  conda install -c bioconda fastp
+   99  conda install -c bioconda trimmomatic
+  100  conda install -c bioconda cutadapt
+  101  conda install -c bioconda bwa
+  102  conda install -c bioconda bowtie2
+  103  conda install -c bioconda hisat2
+  104  conda install -c bioconda minimap2
+  105  conda install -c bioconda samtools
+  106  conda install -c bioconda bcftools
+  107  conda install -c bioconda picard
+  108  conda install -c bioconda gatk4
+  109  conda install -c bioconda snpeff
+  110  conda install -c bioconda ensembl-vep
+  111  fastqc --version
+  112  fastp --version
+  113  cutadapt --version
+  114  bwa
+  115  bowtie2 --version
+  116  hisat2 --version
+  117  minimap2 --version
+  118  samtools --version
+  119  bcftools --version
+  120  picard CreateSequenceDictionary --version
+  121  gatk --version
+  122  snpEff -version
+  123  vep --help
+  124  fastqc --version
+  125  fastp --version
+  126  cutadapt --version
+  127  bwa
+  128  bowtie2 --version
+  129  hisat2 --version
+  130  minimap2 --version
+  131  samtools --version
+  132  bcftools --version
+  133  picard CreateSequenceDictionary --version
+  134  gatk --version
+  135  snpEff -version
+  136  /home/shubh/ENTER/envs/bnf/share/snpeff-5.3.0a-0/snpEff.jar
+  137  #!/bin/bash
+  138  # List of tools to check
+  139  TOOLS=(     "python3"     "java"     "samtools"     "bcftools"     "fastqc"     "snpEff"     "annovar"     "nextflow"     "snakemake"     "docker"     "conda" )
+  140  echo "Checking installation and version of tools..."
+  141  for TOOL in "${TOOLS[@]}"; do     echo -n "Checking $TOOL... ";     
+  142      case $TOOL in         snpEff)             if command -v java >/dev/null 2>&1; then                 java -jar $(which snpEff.jar 2>/dev/null) >/dev/null 2>&1;                 if [ $? -eq 0 ]; then                     echo "Installed and working";                 else                     echo "Not responding or snpEff.jar not found";                 fi;             else                 echo "Java not installed, so snpEff cannot run";             fi;             ;;         annovar)             if [ -d "$HOME/annovar" ]; then                 echo "Installed (annovar directory found)";             else                 echo "Not installed";             fi;             ;;         *)             if command -v $TOOL >/dev/null 2>&1; then
+  143                  VERSION=$($TOOL --version 2>&1 | head -n 1);                 echo "Installed ($VERSION)";             else                 echo "Not installed";             fi;             ;;     esac; done
+  144  echo "Tool check completed."
+  145  #!/bin/bash
+  146  echo "=== Bioinformatics Pipeline Setup & Check ==="
+  147  # Ensure ~/bin exists
+  148  mkdir -p ~/bin
+  149  export PATH=$PATH:~/bin
+  150  # -----------------------------
+  151  # 1️⃣ Python and Java (check)
+  152  # -----------------------------
+  153  echo -e "\nChecking Python and Java..."
+  154  command -v python3 >/dev/null 2>&1 && echo "Python3 Installed: $(python3 --version)" || echo "Python3 not found"
+  155  command -v java >/dev/null 2>&1 && echo "Java Installed: $(java -version 2>&1 | head -n1)" || echo "Java not found"
+  156  # -----------------------------
+  157  # 2️⃣ Samtools and Bcftools
+  158  # -----------------------------
+  159  echo -e "\nChecking samtools and bcftools..."
+  160  for TOOL in samtools bcftools; do     if command -v $TOOL >/dev/null 2>&1; then         echo "$TOOL Installed: $($TOOL --version | head -n1)";     else         echo "$TOOL not installed. Installing...";         sudo apt update && sudo apt install -y $TOOL;     fi; done
+  161  # -----------------------------
+  162  # 3️⃣ FastQC
+  163  # --
+  164  #!/bin/bash
+  165  echo "=== Bioinformatics Pipeline Setup & Check ==="
+  166  # Ensure ~/bin exists
+  167  mkdir -p ~/bin
+  168  export PATH=$PATH:~/bin
+  169  # -----------------------------
+  170  # 1️⃣ Python and Java (check)
+  171  # -----------------------------
+  172  echo -e "\nChecking Python and Java..."
+  173  command -v python3 >/dev/null 2>&1 && echo "Python3 Installed: $(python3 --version)" || echo "Python3 not found"
+  174  command -v java >/dev/null 2>&1 && echo "Java Installed: $(java -version 2>&1 | head -n1)" || echo "Java not found"
+  175  # -----------------------------
+  176  # 2️⃣ Samtools and Bcftools
+  177  # -----------------------------
+  178  echo -e "\nChecking samtools and bcftools..."
+  179  for TOOL in samtools bcftools; do     if command -v $TOOL >/dev/null 2>&1; then         echo "$TOOL Installed: $($TOOL --version | head -n1)";     else         echo "$TOOL not installed. Installing...";         sudo apt update && sudo apt install -y $TOOL;     fi; done
+  180  # -----------------------------
+  181  # 3️⃣ FastQC
+  182  # -----------------------------
+  183  echo -e "\nChecking FastQC..."
+  184  if command -v fastqc >/dev/null 2>&1; then     echo "FastQC Installed: $(fastqc --version)"; else     echo "FastQC not installed. Installing...";     sudo apt update && sudo apt install -y fastqc; fi
+  185  # -----------------------------
+  186  # 4️⃣ snpEff
+  187  # -----------------------------
+  188  echo -e "\nChecking snpEff..."
+  189  SNP_DIR=~/snpEff
+  190  if [ -f "$SNP_DIR/snpEff.jar" ]; then     echo "snpEff Installed"; else     echo "snpEff not found. Downloading...";     wget -O snpEff_latest.zip https://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip;     unzip snpEff_latest.zip -d ~/snpEff;     rm snpEff_latest.zip; fi
+  191  # Test snpEff
+  192  if java -jar $SNP_DIR/snpEff.jar >/dev/null 2>&1; then     echo "snpEff working"; else     echo "snpEff not responding"; fi
+  193  # -----------------------------
+  194  # 5️⃣ ANNOVAR
+  195  # -----------------------------
+  196  echo -e "\nChecking ANNOVAR..."
+  197  if [ -d "$HOME/annovar" ]; then     echo "ANNOVAR Installed"; else     echo "ANNOVAR not found. Please download from https://annovar.openbioinformatics.org/en/latest/user-guide/download/"; fi
+  198  # -----------------------------
+  199  # 6️⃣ Nextflow
+  200  # -----------------------------
+  201  echo -e "\nChecking Nextflow..."
+  202  if command -v nextflow >/dev/null 2>&1; then     echo "Nextflow Installed: $(nextflow -v | head -n1)"; else     echo "Nextflow not found. Installing...";     curl -s https://get.nextflow.io | bash;     mv nextflow ~/bin/; fi
+  203  # -----------------------------
+  204  # 7️⃣ Snakemake
+  205  # -----------------------------
+  206  echo -e "\nChecking Snakemake..."
+  207  if command -v snakemake >/dev/null 2>&1; then     echo "Snakemake Installed: $(snakemake --version)"; else     echo "Snakemake not found. Installing via conda...";     conda install -c bioconda snakemake -y; fi
+  208  fastqc --version
+  209  fastp --version
+  210  cutadapt --version
+  211  trimmomatic -version
+  212  bwa
+  213  bwa-mem2
+  214  bowtie2 --version
+  215  hisat2 --version
+  216  minimap2 --version
+  217  samtools --version
+  218  picard -h
+  219  sambamba --version
+  220  gatk --help
+  221  bcftools --version
+  222  snpeff
+  223  vep –help
+  224  nano check_pipeline_env.sh
+  225  nano check_biotools.sh
+  226  ls ~/annovar
+  227  annotate_variation.pl
+  228  convert2annovar.pl
+  229  table_annovar.pl
+  230  humandb/
+  231  perl ~/annovar/annotate_variation.pl --help
+  232  Usage: annotate_variation.pl [arguments] ...
+  233  #!/bin/bash
+  234  echo "=============================================="
+  235  echo "   BIOINFORMATICS TOOL INSTALLATION CHECK     "
+  236  echo "=============================================="
+  237  # Function to check command availability
+  238  check_tool() {     if command -v $1 &> /dev/null;     then         echo "[OK] $1 is installed";         $1 --version 2>/dev/null | head -n 1;     else         echo "[MISSING] $1 is NOT installed";     fi;     echo "----------------------------------------------"; }
+  239  echo "Checking essential tools..."
+  240  check_tool python3
+  241  check_tool java
+  242  check_tool gcc
+  243  check_tool g++
+  244  check_tool make
+  245  check_tool git
+  246  echo "Checking bioinformatics tools..."
+  247  check_tool samtools
+  248  check_tool bcftools
+  249  check_tool bedtools
+  250  check_tool tabix
+  251  check_tool bwa
+  252  check_tool bowtie2
+  253  check_tool hisat2
+  254  check_tool minimap2
+  255  check_tool fastqc
+  256  check_tool cutadapt
+  257  check_tool spades.py
+  258  check_tool blastn
+  259  check_tool muscle
+  260  check_tool mafft
+  261  check_tool hmmer
+  262  echo "Checking pipeline tools..."
+  263  check_tool nextflow
+  264  check_tool snakemake
+  265  echo "Checking annotation tools..."
+  266  check_tool snpEff
+  267  check_tool gatk
+  268  check_tool annovar
+  269  echo "=============================================="
+  270  echo "TOOL CHECK COMPLETE."
+  271  echo "=============================================="
+  272  conda activate bnf
+  273  conda list
+  274  conda env
+  275  conda install bioconda::annonars
+  276  conda list
+  277  pwd
+  278  git version
+  279  pwd
+  280  ls -l
+  281  cd ../
+  282  ls -l
+  283  cd ./
+  284  cd ../
+  285  ls -l
+  286  cd C:/Users/shubh/OneDrive/Desktop
+  287  cd -
+  288  sudo apt-get update 
+  289  sudo apt-get install gromacs
+  290  conda activate bnf
+  291  igv
+  292  conda activate bnf
+  293  igv
+  294  java --version
+  295  igv --version
+  296  sudo apt install igv
+  297  igv --version
+  298  igv
+  299  igv
+  300  activate conda bnf
+  301  activate conda -bnf
+  302  conda activate bnf
+  303  igv
+  304  cd \\wsl.localhost\Ubuntu\home\shubh\MD
+  305  ls
+  306  cd /home/shubh/MD/
+  307  LS
+  308  ls
+  309  grep -v HOH 5AWL.pdb > protein.pdb
+  310  tar -xvzf charmm36-jul2022.ff.tgz
+  311  gmx pdb2gmx -f protein.pdb -o protein.gro -water tip3p
+  312  gmx editconf -f protein.gro -o protein_box.gro -c -d 1.2 -bt cubic
+  313  gmx solovate -cp protein_box.gro -cs spc216.gro -o protein_solv.gro -p topol.top
+  314  gmx solvate -cp protein_box.gro -cs spc216.gro -o protein_solv.gro -p topol.top
+  315  cp ions.mdp.txt.ions.mdp
+  316  gmx grompp -f ions.mdp -c protein_solv.gro -p topol.top -o ions.tpr
+  317  cp ions.mdp.txt ions.mdp
+  318  gmx grompp -f ions.mdp -c protein_solv.gro -p topol.top -o ions.tpr
+  319  gmx genion -s ions.tpr -o protein_solv_ions.gro -p topol.top -pname NA -nmame CL -neutral
+  320  gmx genion -s ions.tpr -o protein_solv_ions.gro -p topol.top -pname NA -nname CL -neutral
+  321  --help
+  322  --version
+  323  ls
+  324  pwd
+  325  ls
+  326  ls -a
+  327  ls -l
+  328  help
+  329  ls
+  330  mkdir
+  331  activate conda bnf
+  332  clear
+  333  conda activate bnf
+  334  cd /mnt/c/Users/shubh/OneDrive/Desktop
+  335  cd ngs
+  336  ls
+  337  cp/cd /mnt/c/Users/shubh/OneDrive/Desktop/to/your/1_control_psbA3_2019_minq7.fastq.
+  338  cd /mnt/c/Users/shubh/OneDrive/Desktop/to/your/1_control_psbA3_2019_minq7.fastq.
+  339  C:\Users\shubh\OneDrive\Desktop\ngs\1_control_psbA3_2019_minq7.fastq.
+  340  cd C:\Users\shubh\OneDrive\Desktop\ngs\1_control_psbA3_2019_minq7.fastq.
+  341  cp "/pasted/path/here/file.fastq" .
+  342  cp -v /your/actual/path/file.fastq .
+  343  cp -v ~/Downloads/your_file.fastq .
+  344  cp "C:\path\to\your\file.fastq" "C:\Users\shubh\OneDrive\Desktop\ngs"
+  345  cp C:/Users/shubh/OneDrive/Desktop/ngs
+  346  cp --help
+  347  cp C:/Users/shubh/OneDrive/Desktop/ngs
+  348  cd C:/Users/shubh/OneDrive/Desktop/ngs
+  349  cd sample.fastq
+  350  C:\Users\shubh\OneDrive\Desktop\ngs
+  351  C:/Users/shubh/OneDrive/Desktop/ngs
+  352  conda activate bnf
+  353  df -h
+  354  cd /mnt/c
+  355  ls
+  356  ls -l
+  357  cd hp
+  358  ls -l
+  359  cd C:/Users/shubh/OneDrive/Desktop/ngs
+  360  cd ..
+  361  ls -l
+  362  ll Users
+  363  cd Users
+  364  ls -l
+  365  cd shubh
+  366  ls -l
+  367  cd Onedrive
+  368  cd ..
+  369  cd -
+  370  cd ../OneDrive
+  371  cd Desktop
+  372  cd ngs
+  373  ls -l
+  374  pwd
+  375  cd 
+  376  ls -l
+  377  cd /mnt/c/Users/shubh/OneDrive/Desktop/ngs
+  378  df -h
+  379  cd /mnt/f/
+  380  ls -l
+  381  mkdir pipeline
+  382  cd pipeline
+  383  mv /mnt/c/Users/shubh/OneDrive/Desktop/ngs/sample.fastq
+  384  mv /mnt/c/Users/shubh/OneDrive/Desktop/ngs/sample.fastq .
+  385  ls -l
+  386  history
+  387  history > file.txt
+  388  du -sch sample.fastq
+  389  which sra
+  390  which sra-tools
+  391  conda install bioconda::sra-tools
+  392  cd /mnt/f/pipeline
+  393  ls -l
+  394  wc -l sample.fastq
+  395  head sample.fastq
+  396  head -n8874 sample.fastq > subsample.fastq
+  397  tail sample.fastq
+  398  clear
+  399  bu -sch
+  400  du -sch
+  401  du -sch sample.fastq subsample.fastq
+  402  conda activate bnf
+  403  fastqc
+  404  fastqc subsample.fastq
+  405  tail sample.fastq
+  406  head -n -4 subsample.fastq > temp.fastq
+  407  tail -f temp.fastq
+  408  m
+  409  tail temp.fastq
+  410  head -n -2 temp.fastq > temp1.fastq
+  411  tail temp1.fastq
+  412  fastqc temp1.fastq
+  413  history
+  414  file2.txt
+  415  history >file2.txt
+  416  history
+  417  conda activate bnf
+  418  cd /mnt/c/shubh/OneDrive/Desktop/pipeline
+  419  cd /mnt/c/shubh/OneDrive/Desktop
+  420  cd/mnt/c/shubh/OneDrive/Desktop
+  421  cd /mnt/c/Users/shubh/OneDrive/Desktop/ngs
+  422  cd..
+  423  cd ..
+  424  cd pipeline
+  425  cd /mnt/c/Users/shubh/OneDrive/Desktop/ngs
+  426  cd ..
+  427  cd /mnt/c/Users/shubh/OneDrive/Desktop/ngs
+  428  cd pipeline
+  429  conda activate bnf
+  430  cd /mnt/c/Users/shubh/OneDrive/Desktop
+  431  mkdir nextflow
+  432  cd nextflow
+  433  fasterq-dump --split-files SRR17607594
+  434  sudo apt install sra-toolkit
+  435  ok
+  436  cd ..
+  437  cd /mnt/c/Users/shubh/OneDrive/Desktop
+  438  cd nextflow
+  439  fasterq-dump SRR17607594 --split-files
+  440  fasterq-dump SRR1553425 --split-files
+  441  ll -ls
+  442  gzip SRR390728_1.fastq SRR390728_2.fastq
+  443  gzip SRR1553425_1.fastq SRR1553425_2.fastq
+  444  ls SRR1553425_*.fastq.gz
+  445  fastqc SRR1553425_1.fastq.gz SRR1553425_2.fastq.gz
+  446  trimmomatic PE SRR1553425_1.fastq.gz SRR1553425_2.fastq.gz SRR1553425_1_paired.fastq.gz SRR1553425_1_unpaired.fastq.gz SRR1553425_2_paired.fastq.gz SRR1553425_2_unpaired.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36
+  447  mkdir fastqc_reports
+  448  mv *_fastqc.* fastqc_reports/
+  449  mkdir fastqc_reports
+  450  trimmomatic PE SRR1553425_1.fastq.gz SRR1553425_2.fastq.gz SRR1553425_1_paired.fastq.gz SRR1553425_1_unpaired.fastq.gz SRR1553425_2_paired.fastq.gz SRR1553425_2_unpaired.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36
+  451  sudo apt update
+  452  sudo apt install trimmomatic -y
+  453  trimmomatic PE SRR1553425_1.fastq.gz SRR1553425_2.fastq.gz SRR1553425_1_paired.fastq.gz SRR1553425_1_unpaired.fastq.gz SRR1553425_2_paired.fastq.gz SRR1553425_2_unpaired.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36
+  454  sudo apt install trimmomatic -y
+  455  fastqc SRR1553425_1_paired.fastq.gz SRR1553425_2_paired.fastq.gz
+  456  #!/usr/bin/env nextflow
+  457  params.reads = "data/*_*.fastq.gz"
+  458  params.outdir = "results/fastqc"
+  459  process fastqc {
+  460  }
+  461  workflow {
+  462  }
+  463  curl -s https://get.nextflow.io | bash
+  464  chmod +x nextflow
+  465  sudo mv nextflow /usr/local/bin/
+  466  mkdir -p ~/nextflow-fastqc
+  467  cd ~/nextflow-fastqc
+  468  nano main.nf
+  469  cd ~/nextflow-fastqc
+  470  nextflow run hello
+  471  sudo apt install fastqc -y
+  472  fastqc --version
+  473  mkdir -p ~/nextflow-fastqc/data
+  474  mv ~/Desktop/*.fastq.gz ~/nextflow-fastqc/data/
+  475  nano ~/nextflow-fastqc/main.nf
+  476  cd ~/nextflow-fastqc
+  477  nextflow run main.nf -with-report report.html -with-trace trace.txt -with-timeline timeline.html
+  478  #!/usr/bin/env nextflow
+  479  nextflow run main.nf -with-report report.html -with-trace trace.txt -with-timeline timeline.html
+  480  nano ~/nextflow-fastqc/main.nf
+  481  nextflow run main.nf -with-report report.html -with-trace trace.txt -with-timeline timeline.html
+  482  nano ~/nextflow-fastqc/main.nf
+  483  nextflow run main.nf -with-report report.html -with-trace trace.txt -with-timeline timeline.html
+  484  nano ~/nextflow-fastqc/main.nf
+  485  nextflow run main.nf
+  486  nextflow run main.nf -resume
+  487  conda activate bnf
+  488  sra --version
+  489  java --version
+  490  sudo apt install sra-toolkit -y
+  491  clear
+  492  sudo apt install sra-toolkit -y
+  493  sudo dpkg --configure -a
+  494  conda activate bnf
+  495  cd /mnt
+  496  cd f
+  497  mkdir human_genome_nextflow
+  498  cd human_genome_nextflow
+  499  mkdir data reference results work
+  500  touch main.nf nextflow.config
+  501  prefetch SRR622461
+  502  conda activate bnf
+  503  prefetch SRR622461
+  504  cd /mnt
+  505  cd f/
+  506  cd human_genome_nextflow
+  507  mkdir data reference results work
+  508  touch main.nf nextflow.config
+  509  prefetch SRR622461
+  510  fasterq-dump SRR622461 --split-files -O data/
+  511  conda activate bnf
+  512  /mnt/f/human_genome_nextflow
+  513  cd /mnt/f/human_genome_nextflow
+  514  touch main.nf nextflow.config
+  515  prefetch SRR622461
+  516  ls
+  517  cd SRR622461
+  518  ls
+  519  rm -f SRR622461.sra.lock
+  520  cd ..
+  521  prefetch SRR622461 --force
+  522  ls
+  523  mkdir -p data
+  524  fasterq-dump SRR622461   --split-files   --threads 6   --outdir data
+  525  conda activate bnf
+  526  cd /mnt/f/human_genome_nextflow
+  527  prefetch SRR622461 --force
+  528  cd ..
+  529  touch main.nf nextflow.config
+  530  fasterq-dump SRR622461 --split-files -O data/
+  531  conda activate bnf
+  532  cd /mnt/f/human_genome_nextflow
+  533  touch main.nf nextflow.config
+  534  fasterq-dump SRR622461 --split-files -O data/
+  535  vdb-config --interactive
+  536  conda activate bnf
+  537  cd /mnt/f/human_genome_nextflow
+  538  vdb-config --interactive
+  539  cd /mnt
+  540  cd d/
+  541  mkdir nextflow_human_ngs
+  542  cd nextflow_human_ngs
+  543  mkdir data results scripts reference work
+  544  sudo apt update && sudo apt upgrade -y
+  545  sudo apt install openjdk-17-jdk -y
+  546  java -version
+  547  curl -s https://get.nextflow.io | bash
+  548  sudo mv nextflow /usr/local/bin/
+  549  nextflow -version
+  550  sudo apt install sra-toolkit -y
+  551  vdb-config --interactive
+  552  cd :/mnt/d/nextflow_human_ngs/data/reference
+  553  cd /mnt/d/nextflow_human_ngs/data/reference
+  554  sudo apt install -y openjdk-17-jdk
+  555  java -version
+  556  curl -s https://get.nextflow.io | bash
+  557  sudo mv nextflow /usr/local/bin/
+  558  nextflow -version
+  559  cd /mnt/d/nextflow
+  560  mkdir -p scripts results work
+  561  cd scripts
+  562  nano main.nf
+  563  cd /mnt/d/nextflow/scripts
+  564  nextflow run main.nf
+  565  cd /mnt/d/nextflow/results
+  566  ls -R
+  567  nano main.nf
+  568  cd /mnt/d/nextflow/scripts
+  569  nextflow run main.nf
+  570  cd /mnt/d/nextflow_human_ngs/data/reference
+  571  conda activate bnf
+  572  sudo apt install -y openjdk-17-jdk
+  573  java -version
+  574  curl -s https://get.nextflow.io | bash
+  575  sudo mv nextflow /usr/local/bin/
+  576  nextflow -version
+  577  JAVA_CMD: /home/shubh/ENTER/envs/bnf/bin/java
+  578  java -version
+  579  sudo apt update
+  580  sudo apt install openjdk-17-jdk
+  581  sudo apt install openjdk-19-jdk
+  582  update-alternatives --config java
+  583  export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+  584  export PATH=$JAVA_HOME/bin:$PATH
+  585  unset JAVA_CMD
+  586  unset JAVA_HOME
+  587  nextflow run your_pipeline.nf
+  588  sudo apt install openjdk-19-jdk
+  589  sudo dpkg --configure -a
+  590  sudo apt install -y openjdk-19-jdk
+  591  java -version
+  592  export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+  593  export PATH=$JAVA_HOME/bin:$PATH
+  594  echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
+  595  echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+  596  source ~/.bashrc
+  597  unset JAVA_CMD
+  598  unset JAVA_HOME
+  599  nextflow run your_pipeline.nf
+  600  curl -s https://get.nextflow.io | bash
+  601  sudo mv nextflow /usr/local/bin/
+  602  nextflow -version
+  603  cd /mnt/d/nextflow
+  604  mkdir -p scripts results work
+  605  cd /mnt/d/nextflow
+  606  mkdir -p /mnt/d/nextflow
+  607  cd /mnt/d/nextflow
+  608  mkdir -p scripts results work
+  609  cd scripts
+  610  nano main.nf
+  611  cd /mnt/d/nextflow/scripts
+  612  nextflow run main.nf
+  613  cd /mnt/d/nextflow/results
+  614  ls -R
+  615  nano /mnt/d/nextflow/scripts/main.nf
+  616  ls -R /mnt/d/nextflow/data
+  617  conda activate bnf
+  618  cd /mnt
+  619  cd d/
+  620  cd nextflow_human_ngs
+  621  cd /mnt/d/nextflow
+  622  mkdir -p data
+  623  cd data
+  624  prefetch SRR1553425
+  625  fasterq-dump SRR1553425 --split-files
+  626  gzip SRR1553425_1.fastq
+  627  gzip SRR1553425_2.fastq
+  628  ls -lh *.fastq.gz
+  629  sudo apt update
+  630  sudo apt install -y fastqc bwa samtools bcftools
+  631  fastqc --version
+  632  bwa
+  633  samtools --version
+  634  bcftools --version
+  635  cd /mnt/d/nextflow
+  636  mkdir -p reference
+  637  cd reference
+  638  wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+  639  gunzip hg38.fa.gz
+  640  bwa index hg38.fa
+  641  conda activate bnf
+  642  cd /mnt
+  643  cd d/
+  644  mkdir -p /mnt/d/nextflow_hg_pipeline/{data,scripts,results,work}
+  645  cd /mnt/d/nextflow_hg_pipeline
+  646  cd data
+  647  wget ftp://ftp.ensembl.org/pub/release-109/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.chromosome.22.fa.gz
+  648  gunzip Homo_sapiens.GRCh38.dna.chromosome.22.fa.gz
+  649  bwa index Homo_sapiens.GRCh38.dna.chromosome.22.fa
+  650  wget https://github.com/nf-core/test-datasets/raw/genomics/fastq/hg38_small/reads_1.fastq.gz
+  651  wget https://github.com/nf-core/test-datasets/raw/genomics/fastq/hg38_small/reads_2.fastq.gz
+  652  nextflow run nf-core/rnaseq   -profile test,docker   --outdir results_test
+  653  java --version
+  654  sudo apt update
+  655  sudo apt install openjdk-25-jdk
+  656  cd data
+  657  wget ftp://ftp.ensembl.org/pub/release-109/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.chromosome.22.fa.gz
+  658  gunzip Homo_sapiens.GRCh38.dna.chromosome.22.fa.gz
+  659  bwa index Homo_sapiens.GRCh38.dna.chromosome.22.fa
+  660  wget https://github.com/nf-core/test-datasets/raw/genomics/fastq/hg38_small/reads_1.fastq.gz
+  661  wget https://github.com/nf-core/test-datasets/raw/genomics/fastq/hg38_small/reads_2.fastq.gz
+  662  sudo apt update
+  663  sudo apt install sra-toolkit -y
+  664  cd /mnt/d/nextflow_hg_pipeline/data
+  665  fastq-dump --gzip --split-files SRR062634
+  666  conda activate bnf
+  667  cd mnt/
+  668  cd /mnt
+  669  cd d/
+  670  nextflow run main.nf
+  671  java -version
+  672  sudo apt update
+  673  sudo apt install openjdk-17-jdk
+  674  java -version
+  675  curl -s "https://get.sdkman.io" | bash
+  676  source "$HOME/.sdkman/bin/sdkman-init.sh"
+  677  sdk install java 17.0.10-tem
+  678  java -version
+  679  openjdk version "17.x.x"
+  680  sudo snap install openjdk
+  681  java -version
+  682  sudo apt remove --purge openjdk-*
+  683  dpkg --list | grep -i jdk
+  684  sudo apt remove --purge openjdk-11-jdk openjdk-11-jre
+  685  sudo apt autoremove
+  686  sudo apt update
+  687  sudo apt install openjdk-21-jdk
+  688  sudo update-alternatives --config java
+  689  sudo update-alternatives --config javac
+  690  export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+  691  export PATH=$JAVA_HOME/bin:$PATH
+  692  source ~/.bashrc
+  693  conda actovate bnf
+  694  java -version
+  695  echo $JAVA_HOME
+  696  clear
+  697  conda activate bnf
+  698  mkdir nextflow-genome
+  699  cd nextflow-genome
+  700  mkdir data
+  701  cp /path/to/human.fa data/
+  702  clear
+  703  cd /path/to/nextflow-genome
+  704  cd /mnt/d/nextflow-genome
+  705  nextflow run main.nf
+  706  java --version
+  707  ls -l
+  708  cd mnt/
+  709  cd /mnt
+  710  cd d
+  711  mkdir genome
+  712  cd genome
+  713  cd ..
+  714  conda activate bnf
+  715  cd d
+  716  cd genome
+  717  sudo apt update && sudo apt upgrade -y
+  718  sudo apt install -y curl wget git
+  719  java -version
+  720  sudo apt install -y openjdk-17-jdk
+  721  java -version
+  722  curl -s https://get.nextflow.io | bash
+  723  chmod +x nextflow
+  724  mkdir -p $HOME/.local/bin
+  725  mv nextflow $HOME/.local/bin/
+  726  echo 'export PATH=$PATH:$HOME/.local/bin' >> ~/.bashrc
+  727  source ~/.bashrc
+  728  nextflow -version
+  729  mkdir my_genome_project
+  730  cd my_genome_project
+  731  nextflow run nf-core/variantcatalogue -profile test,docker --outdir test_results
+  732  conda activate bnf
+  733  cd /mnt
+  734  cd d/
+  735  # Make sure conda is installed first
+  736  conda create -n genomics nextflow fastqc cutadapt bwa samtools bcftools sra-tools -c bioconda -c conda-forge
+  737  conda activate genomics
+  738  mkdir genome
+  739  cd genome
+  740  wget ftp://ftp.ensembl.org/pub/release-109/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+  741  gunzip Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+  742  cd ..
+  743  # Download paired FASTQ from SRA
+  744  fastq-dump --split-files SRR1234567
+  745  gzip SRR1234567_*.fastq
+  746  fastq-dump --split-files SRR1234567
+  747  SRR1234567_1.fastq
+  748  SRR1234567_2.fastq
+  749  params {
+  750  }
+  751  process {
+  752  }
+  753  conda activate bnf
+  754  cd /mnt
+  755  cd c/
+  756  cd d/
+  757  cd ..
+  758  cd d/
+  759  mkdir -p SRA_raw
+  760  cd SRA_raw
+  761  prefetch SRRXXXXXXX
+  762  prefetch SRR6761961
+  763  conda activate bnf
+  764  cd /mnt
+  765  cd /f
+  766  cd f/
+  767  mksir genome
+  768  mkdir genome
+  769  cd genome
+  770  # Download the SRA file
+  771  prefetch SRR6761961
+  772  clear
+  773  conda activate bnf
+  774  cd /mnt
+  775  cd f/
+  776  cd genome
+  777  mkdir -p ~/nextflow_sra_pipeline/{data,scripts,results,work}
+  778  cd ~/nextflow_sra_pipeline
+  779  fastq-dump --split-files --gzip ~/nextflow_sra_pipeline/data/SRR6761961.sra -O ~/nextflow_sra_pipeline/data/
+  780  conda activate bnf
+  781  cd /mnt
+  782  cd d/
+  783  cd f/
+  784  cd ..
+  785  cd f/
+  786  cd genome
+  787  cd SRR6761961
+  788  cd ..
+  789  clear
+  790  conda activate bnf
+  791  openjdk --version
+  792  java --version
+  793  cd /mnt
+  794  cd d/
+  795  mkdir -p ~/nextflow_human_small/{data,results,work}
+  796  cd ~/nextflow_human_small
+  797  cd data
+  798  prefetch SRR6761961
+  799  exit
+  800  conda activate bnf
+  801  cd /mnt
+  802  cd d/
+  803  mkdir -p ~/nextflow_human_small/{data,results,work}
+  804  cd ~/nextflow_human_small
+  805  cd /mnt
+  806  cd /d
+  807  cd d/
+  808  cd nextflow_human_small/
+  809  clear
+  810  mkdir nextflow_human_small
+  811  cd  nextflow_human_small
+  812  mkdir data
+  813  cd data
+  814  prefetch SRR6761961
+  815  exit
+  816  conda activate bnf
+  817  fastqc
+  818  sudo apt get upgrade -y
+  819  conda activate bnf
+  820  sudo apt get upgrade -y
+  821  Khare@2004
+  822  exit
+  823  conda activate bnf
+  824  sudo apt get update -y
+  825  2025
+  826  clear
+  827  sudo apt get update -y
+  828  sudo apt update
+  829  sudo apt upgrade
+  830  cd /mnt
+  831  cd d/
+  832  java --version
+  833  tree
+  834  conda install -c bioconda sra-tools
+  835  vdb-config --interactive
+  836  prefetch SRR7695235
+  837  fasterq-dump SRR7695235 --split-files
+  838  mkdir nextflow
+  839  cd nextflow
+  840  prefetch SRR7695235
+  841  fasterq-dump SRR7695235 --split-files
+  842  fastqc SRR7695235_1.fastq SRR7695235_2.fastq
+  843  ls
+  844  ls work
+  845  mkdir nextflow_pipeline
+  846  cd nextflow_pipeline
+  847  mkdir data scripts results work
+  848  mv /mnt/d/nextflow/SRR7695235_*.fastq data/
+  849  cd scripts
+  850  nano main.nf
+  851  cd..
+  852  nextflow run scripts/main.nf
+  853  /usr/bin/java -version
+  854  readlink -f /usr/bin/java
+  855  export JAVA_CMD=/usr/bin/java
+  856  export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+  857  java -version
+  858  nextflow run scripts/main.nf
+  859  nano ~/.bashrc
+  860  source ~/.bashrc
+  861  nextflow -v
+  862  nextflow run scripts/main.nf
+  863  ls
+  864  ll -ls
+  865  pwd
+  866  nextflow run main.nf
+  867  nano main.nf
+  868  cd ..
+  869  nextflow run scripts/main.nf -resume
+  870  clear
+  871  conda activate bnf
+  872  java --version
+  873  openjdk --version
+  874  nextflow --version
+  875  clear
+  876  exit
+  877  conda activate bnf
+  878  cd mnt/
+  879  cd /mnt
+  880  cd f/
+  881  mkdir project
+  882  cd project
+  883  mkdir data results scripts work
+  884  cd /mnt/f/project/data
+  885  prefetch SRR6761961
+  886  fasterq-dump SRR6761961 --split-files
+  887  mkdir ../results/fastqc_raw
+  888  fastqc SRR6761961_1.fastq SRR6761961_2.fastq -o ../results/fastqc_raw
+  889  mkdir ../results/trimmed
+  890  trimmomatic PE SRR6761961_1.fastq SRR6761961_2.fastq ../results/trimmed/read1_paired.fastq ../results/trimmed/read1_unpaired.fastq ../results/trimmed/read2_paired.fastq ../results/trimmed/read2_unpaired.fastq SLIDINGWINDOW:4:20 MINLEN:36
+  891  mkdir ../results/fastqc_trimmed
+  892  fastqc ../results/trimmed/read1_paired.fastq ../results/trimmed/read2_paired.fastq -o ../results/fastqc_trimmed
+  893  cd /mnt/f/project/data
+  894  wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+  895  gunzip hg38.fa.gz
+  896  bwa index hg38.fa
+  897  bwa mem hg38.fa ../results/trimmed/read1_paired.fastq ../results/trimmed/read2_paired.fastq > ../results/aligned.sam
+  898  samtools view -Sb ../results/aligned.sam > ../results/aligned.bam
+  899  bcftools mpileup -f hg38.fa ../results/aligned_sorted.bam > ../results/raw.bcf
+  900  samtools sort ../results/aligned.bam -o ../results/aligned_sorted.bam
+  901  bcftools mpileup -f hg38.fa ../results/aligned_sorted.bam > ../results/raw.bcf
+  902  bcftools call -mv -Ov ../results/raw.bcf > ../results/variants.vcf
+  903  bcftools filter -i 'QUAL>30' ../results/variants.vcf > ../results/variants_filtered.vcf
+  904  cd /mnt/f/project/scripts
+  905  nano main.nf
+  906  cd /mnt/f/project
+  907  nextflow run scripts/main.nf
+  908  fastqc --version
+  909  trimmomatic -version
+  910  bwa
+  911  samtools
+  912  bcftools
+  913  nextflow -version
+  914  cd /mnt/f/project/scripts
+  915  nano main.nf
+  916  cd /mnt/f/project
+  917  nextflow run scripts/main.nf
+  918  cd /mnt/f/project/scripts
+  919  nano main.nf
+  920  cd /mnt/f/project
+  921  nextflow run scripts/main.nf
+  922  ls /mnt/f/project/data
+  923  which trimmomatic
+  924  trimmomatic -version
+  925  cd /mnt/f/project
+  926  nextflow clean -f
+  927  nextflow run scripts/main.nf
+  928  cd /mnt/f/project/scripts
+  929  nano main.nf
+  930  cd /mnt/f/project
+  931  nextflow clean -f
+  932  nextflow run scripts/main.nf
+  933  cd /mnt/f/project/scripts
+  934  nano main.nf
+  935  cd /mnt/f/project
+  936  nextflow clean -f
+  937  nextflow run scripts/main.nf
+  938  cd /mnt/f/project/scripts
+  939  nano main.nf
+  940  cd /mnt/f/project
+  941  nextflow clean -f
+  942  nextflow run scripts/main.nf
+  943  # Make sure you are in the project folder
+  944  cd /mnt/f/project
+  945  # Run Nextflow pipeline
+  946  nextflow run scripts/main.nf   --read1 /mnt/f/project/data/reads_1.fastq.gz   --read2 /mnt/f/project/data/reads_2.fastq.gz   -with-trace   -with-report report.html   -with-timeline timeline.html   -with-dag flowchart.png
+  947  ls /mnt/f/project/data/
+  948  cd /mnt/f/project/data
+  949  mv SRR6761961_1.fastq reads_1.fastq
+  950  mv SRR6761961_2.fastq reads_2.fastq
+  951  nextflow run scripts/main.nf   --read1 /mnt/f/project/data/reads_1.fastq   --read2 /mnt/f/project/data/reads_2.fastq   -with-trace   -with-report report.html   -with-timeline timeline.html   -with-dag flowchart.png
+  952  cd /mnt/f/project
+  953  nextflow run scripts/main.nf   --read1 ./data/reads_1.fastq   --read2 ./data/reads_2.fastq   -with-trace   -with-report report.html   -with-timeline timeline.html   -with-dag flowchart.png
+  954  sudo apt update
+  955  sudo apt install graphviz
+  956  chmod -R u+w /mnt/f/project
+  957  nextflow run scripts/main.nf   --read1 ./data/reads_1.fastq   --read2 ./data/reads_2.fastq   -with-trace   -with-report report.html   -with-timeline timeline.html   -with-dag flowchart.png
+  958  dot -V
+  959  cd /mnt/f/project
+  960  nextflow clean -f
+  961  chmod -R u+w /mnt/f/project
+  962  nextflow run scripts/main.nf   --read1 ./data/reads_1.fastq   --read2 ./data/reads_2.fastq   -with-trace   -with-report report.html   -with-timeline timeline.html   -with-dag flowchart.png
+  963  java --version
+  964  history >commands.txt
